@@ -30,26 +30,23 @@
 int RSA_e_f4_verify(const RSAPublicKey* key,
                     const uint8_t* signature,
                     const int len,
-                    const uint8_t* hash,
-                    const int hash_len);
+                    const uint8_t* sha);
 
 int RSA_e_3_verify(const RSAPublicKey *key,
                    const uint8_t *signature,
                    const int len,
-                   const uint8_t *hash,
-                   const int hash_len);
+                   const uint8_t *sha);
 
 int RSA_verify(const RSAPublicKey *key,
                const uint8_t *signature,
                const int len,
-               const uint8_t *hash,
-               const int hash_len) {
+               const uint8_t *sha) {
     switch (key->exponent) {
         case 3:
-            return RSA_e_3_verify(key, signature, len, hash, hash_len);
+            return RSA_e_3_verify(key, signature, len, sha);
             break;
         case 65537:
-            return RSA_e_f4_verify(key, signature, len, hash, hash_len);
+            return RSA_e_f4_verify(key, signature, len, sha);
             break;
         default:
             return 0;
